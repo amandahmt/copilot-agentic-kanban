@@ -437,7 +437,7 @@ async function startServer(instanceId, boardId) {
             }
             notFound(res);
         } catch (error) {
-            if (error instanceof CanvasError) {
+            if (error instanceof CanvasError || (error && typeof error === "object" && typeof error.code === "string")) {
                 sendJson(res, 400, { error: error.message, code: error.code });
                 return;
             }
